@@ -1,4 +1,4 @@
-package com.glo.analytics
+package com.analytics
 
 typealias ParameterName = String
 

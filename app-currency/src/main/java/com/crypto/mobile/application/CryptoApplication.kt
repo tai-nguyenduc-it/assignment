@@ -4,8 +4,8 @@ import android.app.Application
 import com.common.logger.GlobalLogger
 import com.common.logger.Logger
 import com.common.logger._globalLogger
-import com.glo.analytics.GlobalAnalyticsReporter
-import com.glo.analytics._globalAnalyticsReporter
+import com.analytics.GlobalAnalyticsReporter
+import com.analytics._globalAnalyticsReporter
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 

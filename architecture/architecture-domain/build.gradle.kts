@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.glo.architecture.domain"
+    namespace = "com.architecture.domain"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

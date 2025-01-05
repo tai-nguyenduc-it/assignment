@@ -1,4 +1,4 @@
-package com.glo.analytics
+package com.analytics
 
 val globalAnalyticsReporter: GlobalAnalyticsReporter by lazy { _globalAnalyticsReporter }
 var _globalAnalyticsReporter = GlobalAnalyticsReporter()
