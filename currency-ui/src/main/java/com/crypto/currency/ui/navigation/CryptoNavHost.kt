@@ -16,7 +16,9 @@ fun CryptoNavHost(navController: NavHostController) {
         startDestination = Splash
     ) {
         composable<Splash> {
-            SplashScreen()
+            SplashScreen(
+                onFinished = { navController.navigate(Home) }
+            )
         }
         composable<Home> {
             HomeScreen()

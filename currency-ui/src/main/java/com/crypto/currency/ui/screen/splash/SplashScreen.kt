@@ -11,16 +11,22 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.architecture.ui.screen.Screen
+import com.crypto.currency.presentation.screen.splash.SplashViewModel
+import com.crypto.currency.presentation.screen.splash.SplashViewState
 import com.crypto.currency.ui.R
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(
+    onFinished: () -> Unit
+) = Screen<SplashViewState, SplashViewModel> {
     val infiniteTransition = rememberInfiniteTransition("logo-animation")
     val rotation by infiniteTransition.animateFloat(
         initialValue = -10f,
@@ -31,18 +37,24 @@ fun SplashScreen() {
         ),
         label = "rotation"
     )
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            modifier = Modifier
-                .size(200.dp)
-                .graphicsLayer {
-                    rotationY = rotation
-                },
-            painter = painterResource(R.drawable.img_crypto),
-            contentDescription = "crypto image"
-        )
+
+    Content { viewState ->
+        LaunchedEffect(viewState.isCompleted) {
+            if (viewState.isCompleted) onFinished()
+        }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(160.dp)
+                    .graphicsLayer {
+                        rotationY = rotation
+                    },
+                painter = painterResource(R.drawable.img_crypto),
+                contentDescription = "crypto image"
+            )
+        }
     }
 }
