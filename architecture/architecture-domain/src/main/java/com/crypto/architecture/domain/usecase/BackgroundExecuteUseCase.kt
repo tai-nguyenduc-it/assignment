@@ -2,6 +2,7 @@ package com.crypto.architecture.domain.usecase
 
 import com.crypto.architecture.domain.coroutine.CoroutineContextProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 abstract class BackgroundExecuteUseCase<in REQUEST, out RESULT> constructor(
@@ -11,7 +12,7 @@ abstract class BackgroundExecuteUseCase<in REQUEST, out RESULT> constructor(
         val result = withContext(coroutineContextProvider.io) {
             executeInBackground(value, this)
         }
-
+        delay(1000)
         callback(result)
     }
 

@@ -4,6 +4,8 @@ import com.crypto.architecture.domain.coroutine.CoroutineContextProvider
 import com.crypto.currency.domain.repository.CurrencyRepository
 import com.crypto.currency.domain.usecase.AddCurrenciesUseCase
 import com.crypto.currency.domain.usecase.AddCurrenciesUseCaseImpl
+import com.crypto.currency.domain.usecase.DeleteCurrenciesUseCase
+import com.crypto.currency.domain.usecase.DeleteCurrenciesUseCaseImpl
 import com.crypto.currency.domain.usecase.GetCurrenciesUseCase
 import com.crypto.currency.domain.usecase.GetCurrenciesUseCaseImpl
 import dagger.Module
@@ -25,4 +27,10 @@ object DomainModule {
         repository: CurrencyRepository,
         coroutineContextProvider: CoroutineContextProvider
     ): AddCurrenciesUseCase = AddCurrenciesUseCaseImpl(repository, coroutineContextProvider)
+
+    @Provides
+    fun providesDeleteCurrenciesUseCase(
+        repository: CurrencyRepository,
+        coroutineContextProvider: CoroutineContextProvider
+    ): DeleteCurrenciesUseCase = DeleteCurrenciesUseCaseImpl(repository, coroutineContextProvider)
 }

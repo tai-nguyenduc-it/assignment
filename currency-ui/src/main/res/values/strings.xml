@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="home_assignment_title">Crypto Assignment</string>
+    <string name="home_clean_data_button_title">Clean Data</string>
+    <string name="home_add_data_button_title">Add Data</string>
+    <string name="home_crypto_list_button_title">Crypto List</string>
+    <string name="home_fiat_list_button_title">Fiat List</string>
+    <string name="home_currency_list_button_title">All Currency</string>
 </resources>
