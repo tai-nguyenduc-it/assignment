@@ -81,6 +81,7 @@ dependencies {
     implementation(project(":currency-data"))
     implementation(project(":currency-datasource"))
     implementation(project(":common"))
+    implementation(project(":analytics"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.retrofit)
