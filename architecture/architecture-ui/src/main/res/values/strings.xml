@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="internal_server_error">Server is down.\nPlease try after a while.</string>
+    <string name="no_internet_error">Your device is offline.\nConnect your device to internet.</string>
+    <string name="unknown_error">Something went wrong.\nPlease try after a while.</string>
+</resources>
