@@ -84,6 +84,9 @@ dependencies {
     implementation(project(":analytics"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
     implementation(libs.retrofit)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
