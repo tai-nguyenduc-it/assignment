@@ -15,15 +15,19 @@ interface CurrencyDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertCurrencies(currencies: List<CurrencyDatabaseModel>)
 
-    @Query("SELECT * FROM currency_table")
-    suspend fun getAllCurrencies(): List<CurrencyDatabaseModel>
-
-    @Query("SELECT * FROM currency_table WHERE id = :id")
-    suspend fun getCurrencyById(id: String): CurrencyDatabaseModel?
-
     @Delete
     suspend fun deleteCurrency(currency: CurrencyDatabaseModel)
 
     @Query("DELETE FROM currency_table")
     suspend fun deleteAllCurrencies()
+
+    @Query(
+        """
+        SELECT * FROM currency_table
+        WHERE name LIKE :query || '%' 
+        OR name LIKE '% ' || :query || '%'
+        OR symbol LIKE :query || '%'
+        """
+    )
+    fun search(query: String): List<CurrencyDatabaseModel>
 }

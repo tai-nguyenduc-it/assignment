@@ -197,4 +197,5 @@ object CryptoColors {
     val primary = Color(0xFF6200EE)
     val secondary = Color(0xFFCCC2DC)
     val tertiary = Color(0xFFEFB8C8)
+    val borderFaint = grey300
 }

@@ -19,6 +19,10 @@ import com.architecture.ui.screen.Screen
 import com.crypto.currency.presentation.screen.home.HomeViewModel
 import com.crypto.currency.presentation.screen.home.HomeViewState
 import com.crypto.currency.ui.R
+import com.crypto.currency.ui.screen.currency.model.CurrencyTypeUiModel
+import com.crypto.currency.ui.screen.currency.model.CurrencyTypeUiModel.All
+import com.crypto.currency.ui.screen.currency.model.CurrencyTypeUiModel.Crypto
+import com.crypto.currency.ui.screen.currency.model.CurrencyTypeUiModel.Fiat
 import com.widget.theme.CryptoDimensions
 import com.widget.ui.button.Button
 import com.widget.ui.button.ButtonState
@@ -26,7 +30,9 @@ import com.widget.ui.button.ButtonState.Enabled
 import com.widget.ui.button.ButtonState.Loading
 
 @Composable
-fun HomeScreen() = Screen<HomeViewState, HomeViewModel> {
+fun HomeScreen(
+    onCurrencyListAction: (CurrencyTypeUiModel) -> Unit,
+) = Screen<HomeViewState, HomeViewModel> {
     Content { viewState ->
         val cleanButtonState = remember(viewState.isDeletingCurrencies) {
             if (viewState.isDeletingCurrencies) Loading else Enabled
@@ -41,9 +47,9 @@ fun HomeScreen() = Screen<HomeViewState, HomeViewModel> {
             addButtonState = addButtonState,
             onCleanClick = viewModel::onDeleteCurrenciesAction,
             onAddClick = viewModel::onAddCurrenciesAction,
-            onCryptoListClick = {},
-            onFiatListClick = {},
-            onAllCurrencyClick = {}
+            onCryptoListClick = { onCurrencyListAction(Crypto) },
+            onFiatListClick = { onCurrencyListAction(Fiat) },
+            onAllCurrencyClick = { onCurrencyListAction(All) }
         )
     }
 }

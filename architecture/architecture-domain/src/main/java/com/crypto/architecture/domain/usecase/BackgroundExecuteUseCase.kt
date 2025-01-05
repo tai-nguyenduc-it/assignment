@@ -12,7 +12,6 @@ abstract class BackgroundExecuteUseCase<in REQUEST, out RESULT> constructor(
         val result = withContext(coroutineContextProvider.io) {
             executeInBackground(value, this)
         }
-        delay(1000)
         callback(result)
     }
 

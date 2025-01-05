@@ -6,16 +6,16 @@ import com.crypto.currency.domain.repository.CurrencyRepository
 import com.crypto.currency.domain.usecase.model.CurrencyDomainModel
 import kotlinx.coroutines.CoroutineScope
 
-abstract class GetCurrenciesUseCase(
+abstract class SearchCurrenciesUseCase(
     coroutineContextProvider: CoroutineContextProvider
-) : BackgroundExecuteUseCase<Unit, List<CurrencyDomainModel>>(coroutineContextProvider)
+) : BackgroundExecuteUseCase<String, List<CurrencyDomainModel>>(coroutineContextProvider)
 
-class GetCurrenciesUseCaseImpl(
+class SearchCurrenciesUseCaseImpl(
     private val repository: CurrencyRepository,
     coroutineContextProvider: CoroutineContextProvider
-) : GetCurrenciesUseCase(coroutineContextProvider) {
+) : SearchCurrenciesUseCase(coroutineContextProvider) {
     override suspend fun executeInBackground(
-        request: Unit,
+        request: String,
         coroutineScope: CoroutineScope
-    ) = repository.currencies()
+    ) = repository.search(request)
 }

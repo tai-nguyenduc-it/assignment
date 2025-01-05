@@ -6,4 +6,6 @@
     <string name="home_crypto_list_button_title">Crypto List</string>
     <string name="home_fiat_list_button_title">Fiat List</string>
     <string name="home_currency_list_button_title">All Currency</string>
+    <string name="currency_search_hint">What are you looking for?</string>
+    <string name="currency_search_no_result_description">No Results</string>
 </resources>

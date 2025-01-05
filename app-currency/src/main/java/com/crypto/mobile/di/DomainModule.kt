@@ -6,8 +6,8 @@ import com.crypto.currency.domain.usecase.AddCurrenciesUseCase
 import com.crypto.currency.domain.usecase.AddCurrenciesUseCaseImpl
 import com.crypto.currency.domain.usecase.DeleteCurrenciesUseCase
 import com.crypto.currency.domain.usecase.DeleteCurrenciesUseCaseImpl
-import com.crypto.currency.domain.usecase.GetCurrenciesUseCase
-import com.crypto.currency.domain.usecase.GetCurrenciesUseCaseImpl
+import com.crypto.currency.domain.usecase.SearchCurrenciesUseCase
+import com.crypto.currency.domain.usecase.SearchCurrenciesUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +16,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object DomainModule {
-    @Provides
-    fun providesGetCurrencyUseCase(
-        repository: CurrencyRepository,
-        coroutineContextProvider: CoroutineContextProvider
-    ): GetCurrenciesUseCase = GetCurrenciesUseCaseImpl(repository, coroutineContextProvider)
-
     @Provides
     fun providesAddCurrenciesUseCase(
         repository: CurrencyRepository,
@@ -33,4 +27,10 @@ object DomainModule {
         repository: CurrencyRepository,
         coroutineContextProvider: CoroutineContextProvider
     ): DeleteCurrenciesUseCase = DeleteCurrenciesUseCaseImpl(repository, coroutineContextProvider)
+
+    @Provides
+    fun providesSearchCurrenciesUseCase(
+        repository: CurrencyRepository,
+        coroutineContextProvider: CoroutineContextProvider
+    ): SearchCurrenciesUseCase = SearchCurrenciesUseCaseImpl(repository, coroutineContextProvider)
 }
