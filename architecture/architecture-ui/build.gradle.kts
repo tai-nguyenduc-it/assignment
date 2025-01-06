@@ -32,6 +32,7 @@ android {
 
 dependencies {
     implementation(project(":architecture:architecture-presentation"))
+    implementation(project(":analytics"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

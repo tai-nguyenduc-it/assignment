@@ -13,6 +13,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import com.analytics.AnalyticsEvent
+import com.analytics.globalAnalyticsReporter
 import com.architecture.presentation.BaseViewModel
 import com.architecture.presentation.PresentationState
 import com.architecture.presentation.event.GenericEvent.InternalServerError
@@ -66,6 +68,7 @@ class ViewScope<State : PresentationState, ViewModel : BaseViewModel<State>>(
 
 @Composable
 inline fun <State : PresentationState, reified ViewModel : BaseViewModel<State>> createViewModelAndBindViewScope(
+    analyticsEvent: AnalyticsEvent? = null,
     content: @Composable ViewScope<State, ViewModel>.() -> Unit
 ) {
     val viewmodel: ViewModel = hiltViewModel()
@@ -74,6 +77,9 @@ inline fun <State : PresentationState, reified ViewModel : BaseViewModel<State>>
     with(scope) {
         LaunchedEffect(key1 = true) {
             viewmodel.onEnter()
+            if(analyticsEvent != null) {
+                globalAnalyticsReporter.logScreen(analyticsEvent)
+            }
         }
         content()
     }

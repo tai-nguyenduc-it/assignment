@@ -10,4 +10,8 @@ class GlobalAnalyticsReporter(
     override fun logEvent(event: AnalyticsEvent) {
         analyticsReporter.logEvent(event)
     }
+
+    override fun logScreen(event: AnalyticsEvent) {
+        analyticsReporter.logScreen(event)
+    }
 }

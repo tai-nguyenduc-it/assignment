@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.analytics.event.ScreenEvent
+import com.analytics.event.ScreenEvent.Splash
 import com.architecture.ui.screen.Screen
 import com.crypto.currency.presentation.screen.splash.SplashViewModel
 import com.crypto.currency.presentation.screen.splash.SplashViewState
@@ -26,7 +28,7 @@ import com.crypto.currency.ui.R
 @Composable
 fun SplashScreen(
     onFinished: () -> Unit
-) = Screen<SplashViewState, SplashViewModel> {
+) = Screen<SplashViewState, SplashViewModel>(Splash) {
     val infiniteTransition = rememberInfiniteTransition("logo-animation")
     val rotation by infiniteTransition.animateFloat(
         initialValue = -10f,

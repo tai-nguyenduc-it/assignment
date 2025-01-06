@@ -39,6 +39,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.analytics.event.ScreenEvent
+import com.analytics.event.ScreenEvent.Currency
 import com.architecture.ui.screen.Screen
 import com.crypto.currency.presentation.screen.currency.CurrencyViewModel
 import com.crypto.currency.presentation.screen.currency.CurrencyViewState
@@ -60,7 +62,7 @@ private const val NUMBER_OF_LOADING_ITEM = 20
 fun CurrencyScreen(
     currencyType: CurrencyTypeUiModel,
     onBackAction: () -> Unit
-) = Screen<CurrencyViewState, CurrencyViewModel> {
+) = Screen<CurrencyViewState, CurrencyViewModel>(Currency(currencyType.toEventType())) {
     var searchKeyword by remember(currencyType) { mutableStateOf("") }
 
     DisposableEffect(searchKeyword) {
@@ -280,5 +282,11 @@ private fun CurrencyItemLoadingState(
             .height(64.dp)
             .shimmerBackground()
     )
+}
+
+private fun CurrencyTypeUiModel.toEventType() = when (this) {
+    All -> "All"
+    Crypto -> "Crypto"
+    Fiat -> "Fiat"
 }
 

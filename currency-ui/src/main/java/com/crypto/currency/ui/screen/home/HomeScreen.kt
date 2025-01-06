@@ -18,6 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import com.analytics.event.HomeEvent
+import com.analytics.event.HomeEvent.CleanData
+import com.analytics.event.ScreenEvent.Home
+import com.analytics.globalAnalyticsReporter
 import com.architecture.presentation.event.GenericEvent.Failed
 import com.architecture.presentation.event.GenericEvent.Successful
 import com.architecture.ui.screen.Screen
@@ -37,11 +41,11 @@ import com.widget.ui.button.ButtonState.Loading
 @Composable
 fun HomeScreen(
     onCurrencyListAction: (CurrencyTypeUiModel) -> Unit,
-) = Screen<HomeViewState, HomeViewModel> {
+) = Screen<HomeViewState, HomeViewModel>(Home) {
     val context = LocalContext.current
 
     ObserveViewModelEvents { event ->
-        when(event) {
+        when (event) {
             Successful -> showToast(context, R.string.generic_successful)
             Failed -> showToast(context, R.string.generic_failed)
         }
@@ -59,8 +63,14 @@ fun HomeScreen(
         HomeContent(
             cleanButtonState = cleanButtonState,
             addButtonState = addButtonState,
-            onCleanClick = viewModel::onDeleteCurrenciesAction,
-            onAddClick = viewModel::onAddCurrenciesAction,
+            onCleanClick = {
+                viewModel::onDeleteCurrenciesAction
+                globalAnalyticsReporter.logEvent(CleanData)
+            },
+            onAddClick = {
+                viewModel::onAddCurrenciesAction
+                globalAnalyticsReporter.logEvent(HomeEvent.InsertData)
+            },
             onCryptoListClick = { onCurrencyListAction(Crypto) },
             onFiatListClick = { onCurrencyListAction(Fiat) },
             onAllCurrencyClick = { onCurrencyListAction(All) }
