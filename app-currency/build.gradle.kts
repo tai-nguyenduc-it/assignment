@@ -16,8 +16,8 @@ android {
         applicationId = "com.crypto.currency"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = libs.versions.memberVersionCode.get().toInt()
-        versionName = libs.versions.memberVersionName.get()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,18 +42,15 @@ android {
         create("Development") {
             dimension = "version"
             applicationIdSuffix = ".dev"
-            buildConfigField("String", "SERVER_URL", "\"https://api.crypto-staging.com/mobile/\"")
             manifestPlaceholders["app_name"] = "Currency-Development"
         }
         create("Production") {
             dimension = "version"
-            buildConfigField("String", "SERVER_URL", "\"https://api.crypto.com/mobile/\"")
             manifestPlaceholders["app_name"] = "Currency"
         }
         create("Staging") {
             dimension = "version"
             applicationIdSuffix = ".staging"
-            buildConfigField("String", "SERVER_URL", "\"https://api.crypto-staging.com/mobile/\"")
             manifestPlaceholders["app_name"] = "Currency-Staging"
         }
     }
@@ -87,7 +84,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-    implementation(libs.retrofit)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 }

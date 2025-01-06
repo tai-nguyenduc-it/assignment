@@ -81,7 +81,7 @@ fun CurrencyScreen(
             loadingContent = { LoadingState(Modifier.padding(padding)) }
         ) { viewState ->
             val currencies = remember(viewState.currencies) {
-                when(currencyType) {
+                when (currencyType) {
                     Crypto -> viewState.currencies.filterIsInstance<CurrencyPresentationModel.Crypto>()
                     Fiat -> viewState.currencies.filterIsInstance<CurrencyPresentationModel.Fiat>()
                     All -> viewState.currencies
@@ -117,23 +117,28 @@ private fun TopBar(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    TopAppBar(
-        modifier = modifier.fillMaxWidth(),
-        title = {
-            SearchInput(
-                keyword = searchKeyword,
-                onValueChange = onSearchChanged
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = null
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        TopAppBar(
+            modifier = Modifier.fillMaxWidth(),
+            title = {
+                SearchInput(
+                    keyword = searchKeyword,
+                    onValueChange = onSearchChanged
                 )
+            },
+            navigationIcon = {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = null
+                    )
+                }
             }
-        }
-    )
+        )
+        HorizontalDivider(color = CryptoColors.borderFaint)
+    }
 }
 
 @Composable
@@ -147,7 +152,10 @@ private fun SearchInput(
         value = keyword,
         onValueChange = onValueChange,
         placeholder = {
-            Text(stringResource(R.string.currency_search_hint))
+            Text(
+                text = stringResource(R.string.currency_search_hint),
+                style = MaterialTheme.typography.titleLarge
+            )
         },
         trailingIcon = {
             if (keyword.isNotEmpty()) {

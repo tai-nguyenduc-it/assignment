@@ -1,5 +1,7 @@
 package com.crypto.currency.ui.screen.home
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import com.architecture.presentation.event.GenericEvent.Failed
+import com.architecture.presentation.event.GenericEvent.Successful
 import com.architecture.ui.screen.Screen
 import com.crypto.currency.presentation.screen.home.HomeViewModel
 import com.crypto.currency.presentation.screen.home.HomeViewState
@@ -33,6 +38,15 @@ import com.widget.ui.button.ButtonState.Loading
 fun HomeScreen(
     onCurrencyListAction: (CurrencyTypeUiModel) -> Unit,
 ) = Screen<HomeViewState, HomeViewModel> {
+    val context = LocalContext.current
+
+    ObserveViewModelEvents { event ->
+        when(event) {
+            Successful -> showToast(context, R.string.generic_successful)
+            Failed -> showToast(context, R.string.generic_failed)
+        }
+
+    }
     Content { viewState ->
         val cleanButtonState = remember(viewState.isDeletingCurrencies) {
             if (viewState.isDeletingCurrencies) Loading else Enabled
@@ -109,4 +123,8 @@ private fun HomeContent(
             )
         }
     }
+}
+
+private fun showToast(context: Context, stringId: String) {
+    Toast.makeText(context, stringId, Toast.LENGTH_SHORT).show()
 }

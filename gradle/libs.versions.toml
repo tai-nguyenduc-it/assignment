@@ -4,8 +4,8 @@ targetSdk = "35"
 compileSdk = "35"
 jvmTarget = "17"
 
-memberVersionName = "3.3.8"
-memberVersionCode = "300138"
+versionName = "3.3.8"
+versionCode = "300138"
 
 ksp = "2.0.21-1.0.28"
 android = "8.7.3"
@@ -19,9 +19,6 @@ activityCompose = "1.9.3"
 composeBom = "2024.12.01"
 hilt = "2.52"
 hiltNavigationCompose = "1.2.0"
-moshi = "1.15.1"
-retrofit = "2.11.0"
-retrofit-interceptor-logging = "4.12.0"
 kotlinx-serialization-json = "1.7.3"
 kotlin-plugin-serialization = "2.0.21"
 kotlin-ktlint = "11.6.0"
@@ -30,7 +27,12 @@ room = "2.6.1"
 
 junit = "4.13.2"
 junitVersion = "1.2.1"
+androidxTestCore = "1.6.1"
+androidxArchCoreTesting = "2.2.0"
 espressoCore = "3.6.1"
+mockitoCore = "5.12.0"
+mockitoKotlin = "2.2.0"
+kotlinxCoroutinesTest = "1.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,27 +50,23 @@ compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
-moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
-retrofit-interceptor-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "retrofit-interceptor-logging" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+androidx-arch-test-core = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxArchCoreTesting" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-test-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-test-android-hilt = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { group = "com.nhaarman.mockitokotlin2", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
 [bundles]
 compose = ["compose-ui", "compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-material3", "compose-activity", "compose-navigation"]
-retrofit = ["retrofit", "retrofit-converter-moshi", "retrofit-interceptor-logging"]
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

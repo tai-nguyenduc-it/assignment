@@ -34,7 +34,8 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit)
-    implementation(libs.moshi.kotlin)
-    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.androidx.test.core)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito)
+    testImplementation(libs.room.testing)
 }

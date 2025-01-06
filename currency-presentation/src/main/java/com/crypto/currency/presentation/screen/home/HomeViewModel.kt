@@ -1,6 +1,8 @@
 package com.crypto.currency.presentation.screen.home
 
 import com.architecture.presentation.BaseViewModel
+import com.architecture.presentation.event.GenericEvent.Failed
+import com.architecture.presentation.event.GenericEvent.Successful
 import com.crypto.architecture.domain.UseCaseExecutorProvider
 import com.crypto.currency.domain.usecase.AddCurrenciesUseCase
 import com.crypto.currency.domain.usecase.DeleteCurrenciesUseCase
@@ -22,9 +24,11 @@ class HomeViewModel @Inject constructor(
         updateDeletingCurrenciesState(true)
         deleteCurrenciesUseCase.start(
             onResult = {
+                sendEvent(Successful)
                 updateDeletingCurrenciesState(false)
             },
             onException = {
+                sendEvent(Failed)
                 updateDeletingCurrenciesState(false)
             }
         )
@@ -35,9 +39,11 @@ class HomeViewModel @Inject constructor(
         addCurrenciesUseCase.start(
             value = currencies,
             onResult = {
+                sendEvent(Successful)
                 updateAddingCurrenciesState(false)
             },
             onException = {
+                sendEvent(Failed)
                 updateAddingCurrenciesState(false)
             }
         )
