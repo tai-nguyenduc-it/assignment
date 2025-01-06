@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.analytics.event.HomeEvent
 import com.analytics.event.HomeEvent.CleanData
+import com.analytics.event.HomeEvent.InsertData
 import com.analytics.event.ScreenEvent.Home
 import com.analytics.globalAnalyticsReporter
 import com.architecture.presentation.event.GenericEvent.Failed
@@ -64,12 +64,12 @@ fun HomeScreen(
             cleanButtonState = cleanButtonState,
             addButtonState = addButtonState,
             onCleanClick = {
-                viewModel::onDeleteCurrenciesAction
+                viewModel.onDeleteCurrenciesAction()
                 globalAnalyticsReporter.logEvent(CleanData)
             },
             onAddClick = {
-                viewModel::onAddCurrenciesAction
-                globalAnalyticsReporter.logEvent(HomeEvent.InsertData)
+                viewModel.onAddCurrenciesAction()
+                globalAnalyticsReporter.logEvent(InsertData)
             },
             onCryptoListClick = { onCurrencyListAction(Crypto) },
             onFiatListClick = { onCurrencyListAction(Fiat) },
